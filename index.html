@@ -15,19 +15,17 @@
 
 <div class="box">
   <h2>HeroCovers Photo Upload</h2>
-  <p>Please type your name:</p>
+  <p>Please upload photos using the same angles shown below.</p>
 
   <input type="text" id="name" placeholder="Your Name" required>
 
-  <p><b>Please upload the front view of your car with the same angle below.
-</b></p>
+  <p><b>Front View</b></p>
   <img src="front.jpg">
   <input type="file" id="front">
   <input type="file" id="front1">
   <input type="file" id="front2">
 
-  <p><b>Please upload the side view of your car with the same angle below.
-</b></p>
+  <p><b>Side View</b></p>
   <img src="side.jpg">
   <input type="file" id="side">
   <input type="file" id="side1">
@@ -36,47 +34,41 @@
   <input type="file" id="side4">
   <input type="file" id="side5">
 
-  <p><b>Please upload the rear view of your car with the same angle below.
-</b></p>
+  <p><b>Rear View</b></p>
   <img src="rear.jpg">
   <input type="file" id="rear">
   <input type="file" id="rear1">
   <input type="file" id="rear2">
 
-  <p><b>Please upload the front wheel of your car with the same angle below.
-</b></p>
+  <p><b>Front Wheel</b></p>
   <img src="front-wheel.jpg">
   <input type="file" id="frontwheel">
   <input type="file" id="frontwheel1">
   <input type="file" id="frontwheel2">
   <input type="file" id="frontwheel3">
 
-  <p><b>Please upload the rear wheel of your car with the same angle below.
-</b></p>
+  <p><b>Rear Wheel</b></p>
   <img src="rear-wheel.jpg">
   <input type="file" id="rearwheel">
   <input type="file" id="rearwheel1">
   <input type="file" id="rearwheel2">
   <input type="file" id="rearwheel3">
 
-  <p><b>Please upload the Headlights of your car with the same angle below and make sure to upload it in high quality and no glares.
-</b></p>
+  <p><b>Headlights</b></p>
   <img src="headlights.jpg">
   <input type="file" id="headlights">
   <input type="file" id="headlights1">
   <input type="file" id="headlights2">
   <input type="file" id="headlights3">
 
-  <p><b>Please upload the Taillights of your car with the same angle below in high quality and no glares.
-</b></p>
+  <p><b>Taillights</b></p>
   <img src="taillights.jpg">
   <input type="file" id="taillights">
   <input type="file" id="taillights1">
   <input type="file" id="taillights2">
   <input type="file" id="taillights3">
 
-  <p><b>Please upload the exhaust of your car with the same angle below.
-</b></p>
+  <p><b>Exhaust</b></p>
   <img src="exhaust.jpg">
   <input type="file" id="exhaust">
   <input type="file" id="exhaust1">
@@ -114,7 +106,7 @@ function submitForm(){
     }
   });
 
-  fetch("YOUR_N8N_WEBHOOK_URL", {
+  fetch("https://primary-production-43b16.up.railway.app/webhook/b22c718b-8b84-4c38-9274-a507de4bcaec", {
     method: "POST",
     body: formData
   })
@@ -131,9 +123,5 @@ function submitForm(){
 }
 </script>
 
-
 </body>
 </html>
-
-
-
