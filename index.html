@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>HeroCovers Photo Upload</title>
+  <style>
+    body { font-family: Arial; background:#f4f4f4; padding:20px; }
+    .box { max-width:650px; background:#fff; padding:20px; margin:auto; border-radius:12px; }
+    h2 { text-align:center; }
+    img { width:100%; border-radius:8px; margin:10px 0; }
+    input, button { width:100%; padding:10px; margin:10px 0; }
+    button { background:#ff6b4a; color:white; border:none; font-size:16px; cursor:pointer; }
+  </style>
+</head>
+<body>
+
+<div class="box">
+  <h2>HeroCovers Photo Upload</h2>
+  <p>Please upload photos using the same angles shown below.</p>
+
+  <input type="text" id="name" placeholder="Your Name" required>
+
+  <p><b>Front View</b></p>
+  <img src="front.jpg">
+  <input type="file" id="front">
+
+  <p><b>Side View</b></p>
+  <img src="side.jpg">
+  <input type="file" id="side">
+
+  <p><b>Rear View</b></p>
+  <img src="rear.jpg">
+  <input type="file" id="rear">
+
+  <p><b>Front Wheel</b></p>
+  <img src="front-wheel.jpg">
+  <input type="file" id="frontwheel">
+
+  <p><b>Rear Wheel</b></p>
+  <img src="rear-wheel.jpg">
+  <input type="file" id="rearwheel">
+
+  <p><b>Headlights</b></p>
+  <img src="headlights.jpg">
+  <input type="file" id="headlights">
+
+  <p><b>Taillights</b></p>
+  <img src="taillights.jpg">
+  <input type="file" id="taillights">
+
+  <p><b>Exhaust</b></p>
+  <img src="exhaust.jpg">
+  <input type="file" id="exhaust">
+
+  <button onclick="submitForm()">Submit Photos</button>
+</div>
+
+<script>
+function submitForm(){
+  const formData = new FormData();
+  formData.append("name", document.getElementById("name").value);
+  formData.append("front", document.getElementById("front").files[0]);
+  formData.append("side", document.getElementById("side").files[0]);
+  formData.append("rear", document.getElementById("rear").files[0]);
+  formData.append("frontwheel", document.getElementById("frontwheel").files[0]);
+  formData.append("rearwheel", document.getElementById("rearwheel").files[0]);
+  formData.append("headlights", document.getElementById("headlights").files[0]);
+  formData.append("taillights", document.getElementById("taillights").files[0]);
+  formData.append("exhaust", document.getElementById("exhaust").files[0]);
+
+  fetch("YOUR_N8N_WEBHOOK_URL", {
+    method: "POST",
+    body: formData
+  }).then(()=>{
+    alert("Upload successful! Thank you.");
+  });
+}
+</script>
+
+</body>
+</html>
