@@ -23,41 +23,64 @@
 </b></p>
   <img src="front.jpg">
   <input type="file" id="front">
+  <input type="file" id="front1">
+  <input type="file" id="front2">
 
   <p><b>Please upload the side view of your car with the same angle below.
 </b></p>
   <img src="side.jpg">
   <input type="file" id="side">
+  <input type="file" id="side1">
+  <input type="file" id="side2">
+  <input type="file" id="side3">
+  <input type="file" id="side4">
+  <input type="file" id="side5">
 
   <p><b>Please upload the rear view of your car with the same angle below.
 </b></p>
   <img src="rear.jpg">
   <input type="file" id="rear">
+  <input type="file" id="rear1">
+  <input type="file" id="rear2">
 
   <p><b>Please upload the front wheel of your car with the same angle below.
 </b></p>
   <img src="front-wheel.jpg">
   <input type="file" id="frontwheel">
+  <input type="file" id="frontwheel1">
+  <input type="file" id="frontwheel2">
+  <input type="file" id="frontwheel3">
 
   <p><b>Please upload the rear wheel of your car with the same angle below.
 </b></p>
   <img src="rear-wheel.jpg">
   <input type="file" id="rearwheel">
+  <input type="file" id="rearwheel1">
+  <input type="file" id="rearwheel2">
+  <input type="file" id="rearwheel3">
 
   <p><b>Please upload the Headlights of your car with the same angle below and make sure to upload it in high quality and no glares.
 </b></p>
   <img src="headlights.jpg">
   <input type="file" id="headlights">
+  <input type="file" id="headlights1">
+  <input type="file" id="headlights2">
+  <input type="file" id="headlights3">
 
   <p><b>Please upload the Taillights of your car with the same angle below in high quality and no glares.
 </b></p>
   <img src="taillights.jpg">
   <input type="file" id="taillights">
+  <input type="file" id="taillights1">
+  <input type="file" id="taillights2">
+  <input type="file" id="taillights3">
 
   <p><b>Please upload the exhaust of your car with the same angle below.
 </b></p>
   <img src="exhaust.jpg">
   <input type="file" id="exhaust">
+  <input type="file" id="exhaust1">
+  <input type="file" id="exhaust2">
 
   <button onclick="submitForm()">Submit Photos</button>
 </div>
@@ -65,25 +88,51 @@
 <script>
 function submitForm(){
   const formData = new FormData();
-  formData.append("name", document.getElementById("name").value);
-  formData.append("front", document.getElementById("front").files[0]);
-  formData.append("side", document.getElementById("side").files[0]);
-  formData.append("rear", document.getElementById("rear").files[0]);
-  formData.append("frontwheel", document.getElementById("frontwheel").files[0]);
-  formData.append("rearwheel", document.getElementById("rearwheel").files[0]);
-  formData.append("headlights", document.getElementById("headlights").files[0]);
-  formData.append("taillights", document.getElementById("taillights").files[0]);
-  formData.append("exhaust", document.getElementById("exhaust").files[0]);
+
+  const name = document.getElementById("name").value;
+  if(!name){
+    alert("Please enter your name.");
+    return;
+  }
+  formData.append("name", name);
+
+  const fields = [
+    "front","front1","front2",
+    "side","side1","side2","side3","side4","side5",
+    "rear","rear1","rear2",
+    "frontwheel","frontwheel1","frontwheel2","frontwheel3",
+    "rearwheel","rearwheel1","rearwheel2","rearwheel3",
+    "headlights","headlights1","headlights2","headlights3",
+    "taillights","taillights1","taillights2","taillights3",
+    "exhaust","exhaust1","exhaust2"
+  ];
+
+  fields.forEach(id => {
+    const input = document.getElementById(id);
+    if(input && input.files.length > 0){
+      formData.append(id, input.files[0]);
+    }
+  });
 
   fetch("YOUR_N8N_WEBHOOK_URL", {
     method: "POST",
     body: formData
-  }).then(()=>{
-    alert("Upload successful! Thank you.");
+  })
+  .then(res => {
+    if(res.ok){
+      alert("Upload successful! Thank you.");
+    } else {
+      alert("Upload failed. Please try again.");
+    }
+  })
+  .catch(()=>{
+    alert("Network error. Please try again.");
   });
 }
 </script>
 
+
 </body>
 </html>
+
 
