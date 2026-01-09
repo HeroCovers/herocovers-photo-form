@@ -78,31 +78,45 @@
 </div>
 
 <script>
-function submitForm(){
-  const formData = new FormData();
+function hasAtLeastOne(ids){
+  return ids.some(id => {
+    const el = document.getElementById(id);
+    return el && el.files.length > 0;
+  });
+}
 
-  const name = document.getElementById("name").value;
+function submitForm(){
+  const name = document.getElementById("name").value.trim();
   if(!name){
     alert("Please enter your name.");
     return;
   }
+
+  const groups = {
+    "Front view": ["front","front1","front2"],
+    "Side view": ["side","side1","side2","side3","side4","side5"],
+    "Rear view": ["rear","rear1","rear2"],
+    "Front wheel": ["frontwheel","frontwheel1","frontwheel2","frontwheel3"],
+    "Rear wheel": ["rearwheel","rearwheel1","rearwheel1","rearwheel3"],
+    "Headlights": ["headlights","headlights1","headlights2","headlights3"],
+    "Taillights": ["taillights","taillights1","taillights2","taillights3"],
+    "Exhaust": ["exhaust","exhaust1","exhaust2"]
+  };
+
+  for(const label in groups){
+    if(!hasAtLeastOne(groups[label])){
+      alert("Please upload at least one photo for: " + label);
+      return;
+    }
+  }
+
+  const formData = new FormData();
   formData.append("name", name);
 
-  const fields = [
-    "front","front1","front2",
-    "side","side1","side2","side3","side4","side5",
-    "rear","rear1","rear2",
-    "frontwheel","frontwheel1","frontwheel2","frontwheel3",
-    "rearwheel","rearwheel1","rearwheel2","rearwheel3",
-    "headlights","headlights1","headlights2","headlights3",
-    "taillights","taillights1","taillights2","taillights3",
-    "exhaust","exhaust1","exhaust2"
-  ];
-
-  fields.forEach(id => {
-    const input = document.getElementById(id);
-    if(input && input.files.length > 0){
-      formData.append(id, input.files[0]);
+  Object.values(groups).flat().forEach(id=>{
+    const el = document.getElementById(id);
+    if(el && el.files.length > 0){
+      formData.append(id, el.files[0]);
     }
   });
 
@@ -110,7 +124,7 @@ function submitForm(){
     method: "POST",
     body: formData
   })
-  .then(res => {
+  .then(res=>{
     if(res.ok){
       alert("Upload successful! Thank you.");
     } else {
@@ -125,3 +139,4 @@ function submitForm(){
 
 </body>
 </html>
+
